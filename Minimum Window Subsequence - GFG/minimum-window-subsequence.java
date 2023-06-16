@@ -28,39 +28,48 @@ class GFG {
 
 class Solution {
     static String minWindow(String str1, String str2) {
-        int n=str1.length();
-        int m=str2.length();
-        int ans[]={-1,0,0};
-         for(int i=0;i<n;i++)
-         {
-             if(str1.charAt(i)==str2.charAt(0))
-             {
-                 int ptr1=i;
-                 int ptr2=0;
-                  while(ptr1<n && ptr2<m)
-                  {
-                      if(str1.charAt(ptr1)==str2.charAt(ptr2))
-                      {
-                          ptr1++;
-                          ptr2++;
-                      }
-                      else 
-                      {
-                          ptr1++;
-                      }
-                  }
-                  if(ptr2==m)
-                  {
-                      //valid 
-                      if(ans[0]==-1 || ans[0]>(ptr1-i))
-                      {
-                          ans[0]=(ptr1-i);
-                          ans[1]=i;
-                          ans[2]=ptr1;
-                      }
-                  }
-             }
-         }
-         return ans[0]==-1 ? "":str1.substring(ans[1],ans[2]);
+        // code here
+         int n=str1.length();
+         int m=str2.length();
+          int ptr1=0;
+          int ptr2=0;
+           while(ptr1<n && ptr2<m)
+           {
+               if(str1.charAt(ptr1)==str2.charAt(ptr2))
+               {
+                   ptr1++;
+                   ptr2++;
+               }
+               else 
+               {
+                   ptr1++;
+               }
+           }
+           if(ptr2!=m)
+           {
+               return "";
+           }
+           int end=ptr1;
+           int start=-1;
+           ptr1--;
+           ptr2--;
+            while(ptr1>=0 && ptr2>=0)
+            {
+                if(str1.charAt(ptr1)==str2.charAt(ptr2))
+                {
+                    ptr1--;
+                    ptr2--;
+                }
+                else 
+                {
+                    ptr1--;
+                }
+                if(ptr2<0)
+                {
+                    start=ptr1;
+                     break;
+                }
+            }
+            return str1.substring(start+1,end);
     }
 }
