@@ -81,11 +81,11 @@ class Solution
         Node fast=head;
         Node slow=head;
         boolean cycle=false;
-        int count=0;
+        
          while(fast.next!=null && fast.next.next!=null)
          {
              slow=slow.next;
-             count++;
+            
              fast=fast.next.next;
               if(slow==fast)
               {
@@ -97,8 +97,7 @@ class Solution
          {
              return 0;
          }
-         if(slow==head)
-           return count;
+         
          int lengthOfCycle=1;
          fast=fast.next;
           while(fast!=slow)
