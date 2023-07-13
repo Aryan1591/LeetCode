@@ -125,26 +125,37 @@ class BinaryTree
     //Function to return a list containing the preorder traversal of the tree.
     static ArrayList<Integer> preorder(Node root)
     {
-        ArrayList<Integer>ans=new ArrayList<>();
-         Stack<Node>st=new Stack<>();
-           if(root==null)
-             return ans;
-           st.add(root);
-            while(!st.isEmpty())
-            {
-                Node node=st.peek();
-                 st.pop();
-                 ans.add(node.data);
-                  if(node.right!=null)
+        ArrayList<Integer>list=new ArrayList<>();
+        Node cur=root;
+         while(cur!=null)
+         {
+             if(cur.left==null)
+             {
+                 list.add(cur.data);
+                  cur=cur.right;
+             }
+             else 
+             {
+                 Node prev=cur.left;
+                  while(prev.right!=null && prev.right!=cur)
                   {
-                      st.add(node.right);
+                      prev=prev.right;
                   }
-                  if(node.left!=null)
+                  if(prev.right==null)
                   {
-                      st.add(node.left);
+                      prev.right=cur;
+                      list.add(cur.data);
+                      cur=cur.left;
                   }
-            }
-            return ans;
+                  else 
+                  {
+                      prev.right=null;
+                      cur=cur.right;
+                  }
+                  
+             }
+         }
+         return list;
     }
 
 }
